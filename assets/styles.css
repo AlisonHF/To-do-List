@@ -1,0 +1,84 @@
+:root {
+    --plano-fundo:#36393b;
+    --fundo-menu: #45484b;
+    --cor-principal: #eee6ab;
+    --cor-secundaria: #c5bc8e;
+    --cor-terciaria: #696758;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: var(--plano-fundo);
+    color:white;
+}
+
+#barra-navegacao {
+    background-color:#eee6ab ;
+    height: 80px;
+}
+
+#conteudo-principal {
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#menu-principal {
+    display: flex;
+    width: 80vw;
+    height: 70vh;
+    border-radius: 10px;
+    background-color: var(--fundo-menu);
+    min-width: 650px;
+    min-height:500px;
+}
+
+.menu-tarefas {
+    text-align: center;
+    border-right: 2px solid var(--cor-principal);
+    padding: 15px;
+}
+
+.link-menu {
+    display: block;
+    background-color: var(--cor-principal);
+    text-decoration: none;
+    color: #45484b;
+    font-size: 18px;
+
+    width: 230px;
+    padding: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.link-menu:hover {
+    background-color: var(--cor-secundaria);
+}
+
+.link-menu:active {
+    background-color: var(--cor-terciaria);
+}
+
+#conteudo {
+    display: block;
+    padding: 20px;
+    color: white;
+    height: 100%;
+    width: 100%;
+}
+
+.form-adicionar {
+    margin: 0 auto;
+    width: 50vw;
+    background-color: var(--fundo-menu);
+    color: white;
+    padding: 20px;
+    border: 2px solid var(--cor-principal);
+    border-radius: 20px;
+}
