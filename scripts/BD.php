@@ -1,7 +1,8 @@
 <?php
     class BD
     {
-        private $dsn = 'mysql:host=localhost;dbname=to_do_list';
+        private $host = 'localhost';
+        private $db_name = 'to_do_list';
         private $usuario = 'root';
         private $senha = '';
         private $conexao = null;
@@ -12,7 +13,7 @@
             {
                 if ($this->conexao === null)
                 {
-                    $this->conexao = new PDO($this->dsn, $this->usuario, $this->senha);
+                    $this->conexao = new PDO("mysql:host=$this->host;dbname=$this->db_name", $this->usuario, $this->senha);
                 }
             }
             catch(PDOException $e)

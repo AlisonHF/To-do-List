@@ -10,6 +10,6 @@
 
         $descricao = $_POST['descricao'];
         $tarefa->adicionarTarefa($descricao);
-        header('Location: ../index.php');
+        header('Location: ../pagina_tarefas.php?adicionar=1');
     }
 ?>

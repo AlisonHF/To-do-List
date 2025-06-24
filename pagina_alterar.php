@@ -1,8 +1,6 @@
 <?php
     require_once('assets/navbar.php'); 
     require_once('assets/menu_principal.php');
-
-    echo $_POST['id_alteracao'];
 ?>
 
 <html lang='pt-BR'>

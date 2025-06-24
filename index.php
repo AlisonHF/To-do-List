@@ -1,7 +1,4 @@
 <?php
-    require_once('scripts/BD.php');
-    require_once('scripts/tarefa.php');
-
     require_once('assets/navbar.php'); 
     require_once('assets/menu_principal.php');
 ?>
@@ -17,7 +14,7 @@
     </head>
     <body>
                 <!-- Conteúdo do menu -->
-                <h2>Bem vindo, selecione uma opção para começar...</h2>
+                <h3>Bem vindo, selecione uma opção para começar...</h3>
             </div>
         </main>
     </div>

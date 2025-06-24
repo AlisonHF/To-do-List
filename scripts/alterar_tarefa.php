@@ -10,6 +10,6 @@
     $id_alteracao = $_POST['id_alteracao'];
 
     $tarefa->alterarTarefa($id_alteracao, $descricao_alterada);
-    header('Location: ../pagina_tarefas.php');
+    header('Location: ../pagina_tarefas.php?alterar=1');
     
 ?>

@@ -7,5 +7,5 @@
     $tarefa = new Tarefa($conexao);
 
     $tarefa->excluirTarefa($id_exclusão);
-    header('Location: ../index.php');
+    header('Location: ../pagina_tarefas.php?excluir=1');
 ?>

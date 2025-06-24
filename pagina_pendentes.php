@@ -1,45 +1,13 @@
 <?php 
     require('scripts/BD.php');
     require_once('scripts/tarefa.php');
-    require_once('assets/navbar.php');
-?>
-
-<?php if(isset($_GET['concluir']) && $_GET['concluir'] == 0): ?>
-    <div class="bg-danger text-center">
-        <h5>Essa tarefa já está concluída!</h5>
-    </div>
-
-<?php elseif(isset($_GET['concluir']) && $_GET['concluir'] == 1): ?>
-    <div class="bg-success text-center">
-        <h5>Tarefa concluída com sucesso!</h5>
-    </div>
-<?php endif ?>
-
-<?php if(isset($_GET['alterar']) && $_GET['alterar'] == 1):?>
-    <div class="bg-success text-center">
-        <h5>Tarefa alterada com sucesso!</h5>
-    </div>
-<?php endif ?>
-
-<?php if(isset($_GET['adicionar']) && $_GET['adicionar'] == 1):?>
-    <div class="bg-success text-center">
-        <h5>Tarefa adicionada com sucesso!</h5>
-    </div>
-<?php endif ?>
-
-<?php if(isset($_GET['excluir']) && $_GET['excluir'] == 1):?>
-    <div class="bg-success text-center">
-        <h5>Tarefa excluída com sucesso!</h5>
-    </div>
-<?php endif ?>
-
-<?php
+    require_once('assets/navbar.php'); 
     require_once('assets/menu_principal.php');
 
     $conexao = (new BD())->conectarBD();
     $tarefa = new Tarefa($conexao);
 
-    $lista = $tarefa->recuperarTarefas();
+    $lista = $tarefa->recuperarTarefasPendentes();
     
 ?>
 
@@ -55,7 +23,7 @@
     <body>
                 <!-- Conteúdo do menu -->
                 <?php if(empty($lista)): ?>
-                    <h3>Sem tarefas para exibir, adicione uma nova tarefa para vê la aqui...</h3>
+                    <h3>Sem tarefas pendentes!</h3>
                 <?php else: ?>
 
                     <?php foreach($lista as $key => $registro): ?>
