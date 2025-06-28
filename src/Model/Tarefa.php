@@ -1,11 +1,13 @@
 <?php 
 
-    class Tarefa {
-        protected $bd = null;
+    require_once __DIR__ . '/../Config/Database.php';
 
-        function __construct($bd)
+    class Tarefa {
+        protected $pdo = null;
+
+        function __construct()
         {
-            $this->bd = $bd;
+            $this->pdo = Database::getConnection();
 
             $query_inicializadora = 'create table if not exists tarefas(
                     id int not null auto_increment,
@@ -17,7 +19,7 @@
 
             try
             {
-                $bd->query($query_inicializadora);
+                $this->pdo->query($query_inicializadora);
             }
             catch(PDOException $e)
             {
@@ -30,7 +32,7 @@
         {
             $descricao_salva = $descricao;
             $query = "insert into tarefas(descricao, data) values (:descricao, NOW())";
-            $stmt = $this->bd->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             $stmt->bindValue(':descricao', $descricao_salva);
             $stmt->execute();
         }
@@ -38,7 +40,7 @@
         public function recuperarTarefas() 
         {
             $query = "select * from tarefas";
-            $stmt = $this->bd->query($query);
+            $stmt = $this->pdo->query($query);
             $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $lista;
         }
@@ -46,7 +48,7 @@
         public function alterarTarefa($id, $descricao)
         {
             $query = 'update tarefas set descricao = :descricao where id = :id';
-            $stmt = $this->bd->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             $stmt->bindValue(':descricao', $descricao);
             $stmt->bindValue(':id', $id);
             $stmt->execute();
@@ -55,7 +57,7 @@
         public function excluirTarefa($id)
         {
             $query = 'delete from tarefas where id = :id';
-            $stmt = $this->bd->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             $stmt->bindValue(':id', $id);
             $stmt->execute();
         }
@@ -63,7 +65,7 @@
         public function recuperarTarefasPendentes() 
         {
             $query = "select * from tarefas where id_status = 1";
-            $stmt = $this->bd->query($query);
+            $stmt = $this->pdo->query($query);
             $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $lista;
         }
@@ -71,7 +73,7 @@
         public function concluirTarefa($id)
         {
             $query_verificadora = 'select id_status from tarefas where id = :id';
-            $stmt = $stmt = $this->bd->prepare($query_verificadora);
+            $stmt = $stmt = $this->pdo->prepare($query_verificadora);
             $stmt->bindValue(':id', $id);
             $stmt->execute();
             $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -82,7 +84,7 @@
             }
 
             $query = 'update tarefas set id_status = :status where id = :id';
-            $stmt = $this->bd->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             $stmt->bindValue(':id', $id);
             $stmt->bindValue(':status', 0);
             $stmt->execute();
@@ -90,7 +92,5 @@
             return true;
 
         }
-
     }
-
 ?>
