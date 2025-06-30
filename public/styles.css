@@ -1,0 +1,114 @@
+:root {
+    /*--background:#36393b; */
+    --background: white;
+    /*--menu-background: #45484b;*/
+    --menu-background: rgb(248, 248, 248);
+    /*--main-color: #eee6ab; */
+    --main-color: #f1c40f;
+    --second-color: #c5bc8e;
+    --tertiary-color: #696758;
+    --warning: #ff475b;
+    --success: #23ae6e;
+    --card: #f0e48d;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: var(--background);
+    color:black;
+}
+
+#navigation-bar{
+    background-color: var(--main-color);
+    height: 80px;
+}
+
+#main-content {
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-menu {
+    display: flex;
+    width: 80vw;
+    height: 70vh;
+    border-radius: 10px;
+    background-color: var(--menu-background);
+    min-width: 650px;
+    min-height:500px;
+    box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.123);
+}
+
+.task-menu {
+    text-align: center;
+    border-right: 2px solid var(--main-color);
+    padding: 15px;
+}
+
+.link-menu {
+    display: block;
+    background-color: var(--main-color);
+    text-decoration: none;
+    color: #45484b;
+    font-size: 18px;
+
+    width: 230px;
+    padding: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.link-menu:hover {
+    background-color: var(--second-color);
+}
+
+.link-menu:active {
+    background-color: var(--tertiary-color);
+}
+
+#content {
+    display: block;
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+}
+
+.standard-form {
+    margin: 0 auto;
+    width: 50vw;
+    background-color: var(--menu-background);
+    padding: 20px;
+    border: 2px solid var(--main-color);
+    border-radius: 20px;
+}
+
+.status-success {
+    height: 40px;
+    background-color: var(--success);
+    color:white;
+    font-size: 24px;
+    text-align: center;
+}
+
+.status-failed {
+    height: 40px;
+    background-color: var(--warning);
+    color:white;
+    font-size: 24px;
+    text-align: center;
+}
+
+.row-forms {
+    display: flex;
+    border-radius: 8px;
+}
+
+.card-task {
+    background: var(--card);
+}

@@ -2,7 +2,7 @@
 
     require_once __DIR__ . '/../Config/Database.php';
 
-    class Tarefa {
+    class Task {
         protected $pdo = null;
 
         function __construct()
@@ -28,33 +28,35 @@
             }
         }
 
-        public function adicionarTarefa($descricao)
+        public function addTask($description)
         {
-            $descricao_salva = $descricao;
+            $saved_description = $description;
             $query = "insert into tarefas(descricao, data) values (:descricao, NOW())";
             $stmt = $this->pdo->prepare($query);
-            $stmt->bindValue(':descricao', $descricao_salva);
-            $stmt->execute();
+            $stmt->bindValue(':descricao', $saved_description);
+            $execute = $stmt->execute();
+            return $execute;
         }
 
-        public function recuperarTarefas() 
+        public function getTasks() 
         {
-            $query = "select * from tarefas";
+            $query = "select id, id_status, descricao, data from tarefas";
             $stmt = $this->pdo->query($query);
-            $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $lista;
+            $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $list;
         }
 
-        public function alterarTarefa($id, $descricao)
+        public function updateTask($id, $description)
         {
             $query = 'update tarefas set descricao = :descricao where id = :id';
             $stmt = $this->pdo->prepare($query);
-            $stmt->bindValue(':descricao', $descricao);
+            $stmt->bindValue(':descricao', $description);
             $stmt->bindValue(':id', $id);
-            $stmt->execute();
+            $execute = $stmt->execute();
+            return $execute;
         }
 
-        public function excluirTarefa($id)
+        public function deleteTask($id)
         {
             $query = 'delete from tarefas where id = :id';
             $stmt = $this->pdo->prepare($query);
@@ -62,18 +64,18 @@
             $stmt->execute();
         }
 
-        public function recuperarTarefasPendentes() 
+        public function getPendingTasks() 
         {
-            $query = "select * from tarefas where id_status = 1";
+            $query = "select id, id_status, descricao, data from tarefas where id_status = 1";
             $stmt = $this->pdo->query($query);
-            $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $lista;
+            $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $list;
         }
 
-        public function concluirTarefa($id)
+        public function completeTask($id)
         {
-            $query_verificadora = 'select id_status from tarefas where id = :id';
-            $stmt = $stmt = $this->pdo->prepare($query_verificadora);
+            $check_query = 'select id_status from tarefas where id = :id';
+            $stmt = $stmt = $this->pdo->prepare($check_query);
             $stmt->bindValue(':id', $id);
             $stmt->execute();
             $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
