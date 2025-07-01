@@ -40,7 +40,8 @@
 
         public function getTasks() 
         {
-            $query = "select id, id_status, descricao, data from tarefas";
+            $query = "select id, id_status, descricao, data from tarefas
+                order by data desc";
             $stmt = $this->pdo->query($query);
             $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $list;
@@ -66,7 +67,8 @@
 
         public function getPendingTasks() 
         {
-            $query = "select id, id_status, descricao, data from tarefas where id_status = 1";
+            $query = "select id, id_status, descricao, data from tarefas where id_status = 1
+                order by data desc";
             $stmt = $this->pdo->query($query);
             $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $list;
@@ -74,13 +76,13 @@
 
         public function completeTask($id)
         {
-            $check_query = 'select id_status from tarefas where id = :id';
-            $stmt = $stmt = $this->pdo->prepare($check_query);
+            $query = 'select id_status from tarefas where id = :id';
+            $stmt = $this->pdo->prepare($query);
             $stmt->bindValue(':id', $id);
             $stmt->execute();
-            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            if ($resultado['id_status'] == 0)
+            if ($result['id_status'] == 0)
             {
                 return false;
             }
@@ -92,7 +94,55 @@
             $stmt->execute();
 
             return true;
+        }
 
+        public function orderby(string $order_by)
+        {
+            switch($order_by)
+            {
+                case 'date':
+                    $query = 'select id, id_status, descricao, data from tarefas
+                        order by data desc';
+                    $stmt = $this->pdo->prepare($query);
+                    $stmt->execute();
+                    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    return $list;
+                    break;
+                case 'alphabetic':
+                    $query = 'select id, id_status, descricao, data from tarefas
+                        order by descricao';
+                    $stmt = $this->pdo->prepare($query);
+                    $stmt->execute();
+                    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    return $list;
+                    break;
+                case 'status':
+                    $query = 'select id, id_status, descricao, data from tarefas
+                        order by id_status asc, data desc';
+                    $stmt = $this->pdo->prepare($query);
+                    $stmt->execute();
+                    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    return $list;
+                    break;
+                case 'date-pending':
+                    $query = 'select id, id_status, descricao, data from tarefas
+                        where id_status = 1
+                        order by data desc';
+                    $stmt = $this->pdo->prepare($query);
+                    $stmt->execute();
+                    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    return $list;
+                    break;
+                case 'alphabetic-pending':
+                    $query = 'select id, id_status, descricao, data from tarefas
+                        where id_status = 1
+                        order by descricao' ;
+                    $stmt = $this->pdo->prepare($query);
+                    $stmt->execute();
+                    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    return $list;
+                    break;
+            }
         }
     }
 ?>

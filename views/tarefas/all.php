@@ -2,7 +2,9 @@
     $status = '';
     $message_status = '';
     $title = 'Todas as tarefas';
+    $order_by = 'all';
 
+    // Checks if the page was requested by any action
     if (isset($_GET['status']))
     {
         if (isset($_GET['action']) && $_GET['action'] === 'delete'){
@@ -55,8 +57,8 @@
   <h3>Sem tarefas para exibir, adicione uma nova tarefa para vê-la aqui...</h3>
 <?php else: ?>
 
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-    <?php foreach($list as $key => $register): ?>
+    <div class="row row-cols-1 row-cols-md-1 row-cols-lg-1 row-cols-xl-2 row-cols-xxl-3 g-4">
+    <?php foreach($list as $key => $register): // Displays the task card ?>
         <div class="col"> 
             <div class="card h-100 card-task">
                 <div class="card-body">
@@ -64,7 +66,7 @@
                     <h6>
                         <?php
                             $date = date_create($register['data']);
-                            $date = $date->format('d-m-Y');
+                            $date = $date->format('d/m/Y');
                         ?>
                         <?= $date ?>
                     </h6>
@@ -76,23 +78,23 @@
                         <?php endif ?>
                     </p>
                     <div class="row-forms">
-                        <form method="POST" action="/tarefas/delete" style="margin-right: 10px;">
-                            <button class="btn btn-outline-danger" name="delete_id" value="<?= $register['id'] ?>" style="color: red;">
+                        <form method="POST" action="/tarefas/delete">
+                            <button class="btn btn-outline-danger btn-options" name="delete_id" value="<?= $register['id'] ?>" >
                                 <i class="bi bi-x-square" style="color:red;"></i> Excluir
                             </button>
                         </form>
                         <?php if ($register['id_status'] == '1'): ?>
-                            <form method="POST" action="/tarefas/edit" style="margin-right: 10px;">
-                                <button class="btn btn-outline-dark" name="edit_id" value="<?= $register['id'] ?>">
+                            <form method="POST" action="/tarefas/edit">
+                                <button class="btn btn-outline-dark btn-options" name="edit_id" value="<?= $register['id'] ?>">
                                 <i class="bi bi-pencil-square"></i> Alterar
                                 </button>
+                                <input name="description_update" value="<?= $register['descricao']?>" hidden>
                             </form>
-                            <form method="POST" action="/tarefas/complete" style="margin-right: 10px;">
-                                <button class="btn btn-outline-success" name="complete_id" style="color: green;" value="<?= $register['id'] ?>">
-                                <i class="bi bi-check-lg" style="color: green;"></i> Concluir
+                            <form method="POST" action="/tarefas/complete">
+                                <button class="btn btn-outline-success btn-options" name="complete_id" value="<?= $register['id'] ?>">
+                                <i class="bi bi-check-lg"></i> Concluir
                                 </button>
                             </form>
-                            
                         <?php endif; ?>
                     </div>
                 </div>   

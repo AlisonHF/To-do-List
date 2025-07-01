@@ -30,23 +30,56 @@
         <?php endif; ?>
         
         <div id="main-content">
-            <main id="main-menu">
-                <ul class="nav flex-column task-menu">
-                    <li>
-                        <a href="/" class="link-menu btn" id="pagina_pendentes">Tarefas pendentes</a>
-                    </li>
-                    <li>
-                        <a href="/tarefas/all" class="link-menu btn" id="pagina_todas">Todas tarefas</a>
-                    </li>
-                    <li>
-                        <a href="/tarefas/create" class="link-menu btn" id="pagina_nova">Nova tarefa</a>
-                    </li>           
+            <div class='div-aux'>
+                <ul class="nav nav-tasks" id="nav-upper">
+                    <?php if(isset($order_by) && $order_by == 'all'): ?>
+                        <li class="nav-item" id="li-order-by">   
+                            <div class="dropdown">
+                                <button class="btn btn-warning btn-sm dropdown-toggle button-order-by" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Ordenar
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/tarefas/all?order_by=date">Por data</a></li>
+                                    <li><a class="dropdown-item" href="/tarefas/all?order_by=alphabetic">Por ordem alfabética</a></li>
+                                    <li><a class="dropdown-item" href="/tarefas/all?order_by=status">Por status</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    <?php elseif(isset($order_by) && $order_by == 'pending'): ?>
+                        <li class="nav-item" id="li-order-by">   
+                                <div class="dropdown">
+                                    <button class="btn btn-warning btn-sm dropdown-toggle button-order-by" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Ordenar
+                                </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="/tarefas?order_by=date">Por data</a></li>
+                                        <li><a class="dropdown-item" href="/tarefas?order_by=alphabetic">Por ordem alfabética</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                    <?php endif; ?>
                 </ul>
+                <main id="main-menu">
 
-                <div id="content" class="scroll-div overflow-auto p-3">
-                    <?= $content ?>
-                </div>
-            </main>
+                    <ul class="nav flex-column task-menu">
+                        <li>
+                            <a href="/" class="link-menu btn" id="pagina_pendentes">Tarefas pendentes</a>
+                        </li>
+                        <li>
+                            <a href="/tarefas/all" class="link-menu btn" id="pagina_todas">Todas tarefas</a>
+                        </li>
+                        <li>
+                            <a href="/tarefas/create" class="link-menu btn" id="pagina_nova">Nova tarefa</a>
+                        </li>           
+                    </ul>
+                    
+                    <div id="content" class="scroll-div overflow-auto">
+                        <?= $content ?>
+                    </div>
+                </main>
+
+                <ul class="nav nav-tasks" id="nav-footer"></ul>
+            </div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
