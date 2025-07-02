@@ -13,7 +13,7 @@
   <li>Copie os arquivos do projeto para onde desejar</li>
   <li>Inicie o XAMPP e ative o módulo 'APACHE' e 'MYSQL'.</li>
   <li>Configure o PHP no PATH do sistema caso não esteja configurado</li>
-  <li>Vá até a pasta Config pelo CMD e aplique o comando para inicializar o banco de dados e as tabelas: <pre>php migrate.php</pre></li>
+  <li>Vá até a pasta src/Config pelo CMD e aplique o comando para inicializar o banco de dados e as tabelas: <pre>php migrate.php</pre></li>
   <li>Vá até a pasta public pelo CMD e aplique o comando: <pre>php -S localhost:8080</pre></li>
   <li>Abra o navegador e acesse: localhost:8080</li>
 </ul>
