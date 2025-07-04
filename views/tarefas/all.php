@@ -1,55 +1,11 @@
 <?php
-    $status = '';
-    $message_status = '';
     $title = 'Todas as tarefas';
-    $order_by = 'all';
+    // Get URL current page
+    $path = explode('?', $_SERVER['REQUEST_URI']);
+    $current_page = $path[0];
 
     // Checks if the page was requested by any action
-    if (isset($_GET['status']))
-    {
-        if (isset($_GET['action']) && $_GET['action'] === 'delete'){
-            switch ($_GET['status'])
-            {
-                case 'success':
-                    $status = 'success';
-                    $message_status = 'Tarefa excluída com sucesso!';
-                    break;
-                case 'failed':
-                    $status = 'failed';
-                    $message_status = 'Não foi possível excluir a tarefa, tente novamente mais tarde!';
-                    break;
-            }
-        }
-        else if (isset($_GET['action']) && $_GET['action'] === 'complete')
-        {
-            switch ($_GET['status'])
-            {
-                case 'success':
-                    $status = 'success';
-                    $message_status = 'Tarefa concluída com sucesso!';
-                    break;
-                case 'failed':
-                    $status = 'failed';
-                    $message_status = 'Não foi possível concluír a tarefa, tente novamente mais tarde!';
-                    break;
-            }
-        }
-
-        else if (isset($_GET['action']) && $_GET['action'] === 'update')
-        {
-            switch ($_GET['status'])
-            {
-                case 'success':
-                    $status = 'success';
-                    $message_status = 'Tarefa alterada com sucesso!';
-                    break;
-                case 'failed':
-                    $status = 'failed';
-                    $message_status = 'Não foi possível alterar a tarefa, tente novamente mais tarde!';
-                    break;
-            }
-        }
-    }
+    
     ob_start(); 
 ?>
 
@@ -58,6 +14,7 @@
 <?php else: ?>
 
     <div class="row row-cols-1 row-cols-md-1 row-cols-lg-1 row-cols-xl-2 row-cols-xxl-3 g-4">
+
     <?php foreach($list as $key => $register): // Displays the task card ?>
         <div class="col"> 
             <div class="card h-100 card-task">
@@ -104,12 +61,12 @@
             </div>
         </div>
     <?php endforeach; ?>
+    
   </div>
 
 <?php endif; ?>
 
-
-<?php 
+<?php
     $content = ob_get_clean();
     require_once('layouts/template.php');
 ?>

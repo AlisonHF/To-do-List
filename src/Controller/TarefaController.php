@@ -51,10 +51,10 @@
             $execute = $this->task->addTask($description);
             if ($execute == '0')
             {
-                header('Location: /tarefas/create?status=failed');
+                header('Location: /tarefas/create?action=create&status=failed');
                 exit;
             }
-            header('Location: /tarefas/create?status=success');
+            header('Location: /tarefas/create?action=create&status=success');
             exit;
         }
 

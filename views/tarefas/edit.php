@@ -2,6 +2,7 @@
     $title = 'Alterar tarefa';
     ob_start();
  ?>
+ 
 <form method="POST" action="/tarefas/update" class="standard-form">
     <h3 style="text-align: center;" class="mt-2 mb-4">Alterar tarefa</h3>
     <label class="form-label">Tarefa</label>

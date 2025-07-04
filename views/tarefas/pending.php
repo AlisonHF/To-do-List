@@ -1,6 +1,9 @@
 <?php 
+    // Get URL current page
+    $path = explode('?', $_SERVER['REQUEST_URI']);
+    $current_page = $path[0];
+
     ob_start();
-    $order_by = 'pending';
 ?>
 
 <?php if(empty($list)): ?>
@@ -8,7 +11,8 @@
 <?php else: ?>
 
     <div class="row row-cols-1 row-cols-md-1 row-cols-lg-1 row-cols-xl-2 row-cols-xxl-3 g-4">
-    <?php foreach($list as $key => $register): ?>
+
+    <?php foreach($list as $key => $register): // Displays the task card ?>
         <div class="col"> 
             <div class="card h-100 card-task">
                 <div class="card-body">
@@ -28,8 +32,8 @@
                         <?php endif ?>
                     </p>
                     <div class="row-forms">
-                        <form method="POST" action="/tarefas/delete" style="margin-right: 10px;">
-                            <button class="btn btn-outline-danger" name="delete_id" value="<?= $register['id'] ?>" style="color: red;">
+                        <form method="POST" action="/tarefas/delete">
+                            <button class="btn btn-outline-danger btn-options" name="delete_id" value="<?= $register['id'] ?>" >
                                 <i class="bi bi-x-square" style="color:red;"></i> Excluir
                             </button>
                         </form>
@@ -38,6 +42,7 @@
                                 <button class="btn btn-outline-dark btn-options" name="edit_id" value="<?= $register['id'] ?>">
                                 <i class="bi bi-pencil-square"></i> Alterar
                                 </button>
+                                <input name="description_update" value="<?= $register['descricao']?>" hidden>
                             </form>
                             <form method="POST" action="/tarefas/complete">
                                 <button class="btn btn-outline-success btn-options" name="complete_id" value="<?= $register['id'] ?>">
@@ -53,6 +58,7 @@
             </div>
         </div>
     <?php endforeach; ?>
+
   </div>
 
 <?php endif ?>

@@ -1,22 +1,4 @@
 <?php
-    $status = '';
-    $message_status = '';
-
-    if (isset($_GET['status']))
-    {
-        switch ($_GET['status'])
-        {
-            case 'success':
-                $status = 'success';
-                $message_status = 'Tarefa adicionada com sucesso!';
-                break;
-            case 'failed':
-                $status = 'failed';
-                $message_status = 'Não foi possível salvar a tarefa, tente novamente mais tarde!';
-                break;
-        }
-    }
-
     $title = 'Adicionar Tarefa';
     ob_start();
 ?>
