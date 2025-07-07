@@ -23,17 +23,17 @@
             }
             catch(PDOException $e)
             {
-                echo '<h3 style="color:red;">Ocorreu um erro para inicializar a tabela!</h3>';
+                echo '<h3 style="color:red;">Ocorreu um erro para inicializar a tabela tarefas!</h3>';
                 echo 'Código:' . $e->getCode() . '<br/>Mensagem: ' . $e->getMessage();
             }
         }
 
-        public function addTask($description)
+        public function addTask(string $description)
         {
-            $saved_description = $description;
+            $add_description = $description;
             $query = "insert into tarefas(descricao, data) values (:descricao, NOW())";
             $stmt = $this->pdo->prepare($query);
-            $stmt->bindValue(':descricao', $saved_description);
+            $stmt->bindValue(':descricao', $add_description);
             $execute = $stmt->execute();
             return $execute;
         }
@@ -47,7 +47,7 @@
             return $list;
         }
 
-        public function updateTask($id, $description)
+        public function updateTask(int | string $id, string $description)
         {
             $query = 'update tarefas set descricao = :descricao where id = :id';
             $stmt = $this->pdo->prepare($query);
@@ -57,7 +57,7 @@
             return $execute;
         }
 
-        public function deleteTask($id)
+        public function deleteTask(int | string $id)
         {
             $query = 'delete from tarefas where id = :id';
             $stmt = $this->pdo->prepare($query);
@@ -74,7 +74,7 @@
             return $list;
         }
 
-        public function completeTask($id)
+        public function completeTask(int | string $id)
         {
             $query = 'select id_status from tarefas where id = :id';
             $stmt = $this->pdo->prepare($query);
@@ -103,46 +103,31 @@
                 case 'date':
                     $query = 'select id, id_status, descricao, data from tarefas
                         order by data desc';
-                    $stmt = $this->pdo->prepare($query);
-                    $stmt->execute();
-                    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    return $list;
                     break;
                 case 'alphabetic':
                     $query = 'select id, id_status, descricao, data from tarefas
                         order by descricao';
-                    $stmt = $this->pdo->prepare($query);
-                    $stmt->execute();
-                    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    return $list;
                     break;
                 case 'status':
                     $query = 'select id, id_status, descricao, data from tarefas
                         order by id_status asc, data desc';
-                    $stmt = $this->pdo->prepare($query);
-                    $stmt->execute();
-                    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    return $list;
                     break;
                 case 'date-pending':
                     $query = 'select id, id_status, descricao, data from tarefas
                         where id_status = 1
                         order by data desc';
-                    $stmt = $this->pdo->prepare($query);
-                    $stmt->execute();
-                    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    return $list;
                     break;
                 case 'alphabetic-pending':
                     $query = 'select id, id_status, descricao, data from tarefas
                         where id_status = 1
                         order by descricao' ;
-                    $stmt = $this->pdo->prepare($query);
-                    $stmt->execute();
-                    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    return $list;
                     break;
             }
+            
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute();
+            $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $list;
         }
     }
 ?>

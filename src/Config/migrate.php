@@ -8,7 +8,7 @@
 
     try
     {
-        $pdo = new PDO("mysql:host=$host", $user, $pass);
+        $pdo = new PDO("mysql:host=$host;charset=$charset", $user, $pass);
 
         $init_db_query = 'create database if not exists to_do_list;';
         $init_table_query = 'create table if not exists tarefas(

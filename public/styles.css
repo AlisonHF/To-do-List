@@ -95,15 +95,6 @@ body, html {
     text-align: center;
 }
 
-.standard-form {
-    margin: 0 auto;
-    width: 50vw;
-    background-color: var(--form-color);
-    padding: 20px;
-    border: 2px solid var(--main-color);
-    border-radius: 20px;
-}
-
 .div-aux {
     box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
@@ -165,4 +156,35 @@ body, html {
     height: 28px;
     padding: 0 10px;
     border-radius: 30px;
+}
+
+
+/* =======================================
+    Task Form
+=======================================*/
+
+.standard-form {
+    margin: 0 auto;
+    width: 50vw;
+    background-color: var(--form-color);
+    padding: 20px;
+    border: 2px solid var(--main-color);
+    border-radius: 20px;
+}
+
+#required-info {
+    display: block;
+    text-align: center;
+    margin: 5px;
+    color: var(--warning);
+}
+
+#button-submit {
+    display: block;
+    width: 20vw;
+    margin: 0 auto;
+}
+
+.input-error {
+    border: 2px solid var(--warning);
 }
