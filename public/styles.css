@@ -51,7 +51,7 @@ body, html {
     min-height:500px;
 }
 
-.task-menu {
+.options-menu {
     text-align: center;
     border-right: 2px solid var(--main-color);
     padding: 15px;
@@ -106,6 +106,51 @@ body, html {
     width: 100%;
 }
 
+
+/* =======================================
+    Ordering
+=======================================*/
+
+#div-order {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+#select-order {
+    height: 30px;
+    text-align: center;
+}
+
+#btn-asc-desc {
+    font-size: 13px;
+    height: 30px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#btn-order {
+    width: 100px;
+    margin: 10px 0px;
+}
+
+#li-order {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-top: auto;
+    border: 2px solid var(--main-color);
+    border-radius: 30px;
+}
+
+.custom-popover {
+    --bs-popover-header-bg: var(--main-color);
+    --bs-popover-bg: var(--card);
+    --bs-popover-color: black;
+}
+
 /* =======================================
     Card Display
 =======================================*/
@@ -145,17 +190,6 @@ body, html {
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     height: 20px;
-}
-
-#li-order-by {
-    float: right;
-    margin: 5px 10px;
-}
-
-.button-order-by {
-    height: 28px;
-    padding: 0 10px;
-    border-radius: 30px;
 }
 
 

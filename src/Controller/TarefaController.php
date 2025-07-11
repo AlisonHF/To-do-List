@@ -15,18 +15,38 @@
 
         public function index()
         {
-            // Checks if any ordering was called
             $order_by = isset($_GET['order_by']) ?  $_GET['order_by'] : '';
-            if (!empty($order_by))
+            $order = isset($_GET['order']) ? $_GET['order'] : '';
+            if (!empty($order_by) && !empty($order))
             {
                 switch($order_by)
                 {
                     case 'date':
-                        $list = $this->task->orderby('date-pending');
-                        include $this->path_views . 'pending.php';
-                        exit;
+                        if ($order == 'asc')
+                        {
+                            $list = $this->task->orderby('date-pending', 'asc');
+                            include $this->path_views . 'pending.php';
+                            exit;
+                        }
+
+                        $list = $this->task->orderby('date-pending', 'desc');
+                            include $this->path_views . 'pending.php';
+                            exit;
+                        
+                        
                     case 'alphabetic':
-                        $list = $this->task->orderby('alphabetic-pending');
+                        if ($order == 'asc')
+                        {
+                            $list = $this->task->orderby('alphabetic-pending', 'asc');
+                            include $this->path_views . 'pending.php';
+                            exit;
+                        }
+
+                        $list = $this->task->orderby('alphabetic-pending', 'desc');
+                            include $this->path_views . 'pending.php';
+                            exit;
+
+                    case 'status':
                         include $this->path_views . 'pending.php';
                         exit;
                 }
@@ -35,7 +55,7 @@
             {
                 $list = $this->task->getPendingTasks();
                 include $this->path_views . 'pending.php';
-            }   
+            }
             
         }
 
@@ -64,30 +84,53 @@
                 header('Location: /tarefas/create?action=create&status=success');
                 exit;
             }
-
-            
         }
 
         public function all()
         {
             // Checks if any ordering was called
             $order_by = isset($_GET['order_by']) ?  $_GET['order_by'] : '';
-            if (!empty($order_by))
+            $order = isset($_GET['order']) ? $_GET['order'] : '';
+            if (!empty($order_by) && !empty($order))
             {
                 switch($order_by)
                 {
                     case 'date':
-                        $list = $this->task->orderby('date');
-                        include $this->path_views . 'all.php';
-                        exit;
+                        if ($order == 'asc')
+                        {
+                            $list = $this->task->orderby('date', 'asc');
+                            include $this->path_views . 'all.php';
+                            exit;
+                        }
+
+                        $list = $this->task->orderby('date', 'desc');
+                            include $this->path_views . 'all.php';
+                            exit;
+                        
+                        
                     case 'alphabetic':
-                        $list = $this->task->orderby('alphabetic');
-                        include $this->path_views . 'all.php';
-                        exit;
+                        if ($order == 'asc')
+                        {
+                            $list = $this->task->orderby('alphabetic', 'asc');
+                            include $this->path_views . 'all.php';
+                            exit;
+                        }
+
+                        $list = $this->task->orderby('alphabetic', 'desc');
+                            include $this->path_views . 'all.php';
+                            exit;
+
                     case 'status':
-                        $list = $this->task->orderby('status');
-                        include $this->path_views . 'all.php';
-                        exit;
+                        if ($order == 'asc')
+                        {
+                            $list = $this->task->orderby('status', 'asc');
+                            include $this->path_views . 'all.php';
+                            exit;
+                        }
+
+                        $list = $this->task->orderby('status', 'desc');
+                            include $this->path_views . 'all.php';
+                            exit;
                 }
             }
             else
@@ -95,7 +138,6 @@
                 $list = $this->task->getTasks();
                 include $this->path_views . 'all.php';
             }
-            
         }
 
         public function delete()

@@ -2,7 +2,7 @@
     $title = 'Todas as tarefas';
     // Get URL current page
     $path = explode('?', $_SERVER['REQUEST_URI']);
-    $current_page = $path[0];
+    $display_page = $path[0];
 
     // Checks if the page was requested by any action
     

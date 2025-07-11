@@ -1,7 +1,7 @@
 <?php 
     // Get URL current page
     $path = explode('?', $_SERVER['REQUEST_URI']);
-    $current_page = $path[0];
+    $display_page = $path[0];
 
     ob_start();
 ?>

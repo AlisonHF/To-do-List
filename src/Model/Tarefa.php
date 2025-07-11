@@ -96,31 +96,31 @@
             return true;
         }
 
-        public function orderby(string $order_by)
+        public function orderby(string $order_by, string $order)
         {
             switch($order_by)
             {
                 case 'date':
-                    $query = 'select id, id_status, descricao, data from tarefas
-                        order by data desc';
+                    $query = "select id, id_status, descricao, data from tarefas
+                        order by data $order";
                     break;
                 case 'alphabetic':
-                    $query = 'select id, id_status, descricao, data from tarefas
-                        order by descricao';
+                    $query = "select id, id_status, descricao, data from tarefas
+                        order by descricao $order";
                     break;
                 case 'status':
-                    $query = 'select id, id_status, descricao, data from tarefas
-                        order by id_status asc, data desc';
+                    $query = "select id, id_status, descricao, data from tarefas
+                    order by id_status $order";
                     break;
                 case 'date-pending':
-                    $query = 'select id, id_status, descricao, data from tarefas
+                    $query = "select id, id_status, descricao, data from tarefas
                         where id_status = 1
-                        order by data desc';
+                        order by data $order";
                     break;
                 case 'alphabetic-pending':
-                    $query = 'select id, id_status, descricao, data from tarefas
+                    $query = "select id, id_status, descricao, data from tarefas
                         where id_status = 1
-                        order by descricao' ;
+                        order by descricao $order";
                     break;
             }
             

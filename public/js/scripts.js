@@ -71,3 +71,49 @@ function validateForm()
         }
     );
 }
+
+
+
+/* =======================================
+    Function Classify
+=======================================*/
+
+function classify()
+{
+    const btn = document.getElementById('btn-asc-desc');
+    const order_input = document.getElementById('order');
+    
+    if (btn.getAttribute('data-order') == 'asc')
+    {
+        btn.innerHTML = "<i class='bi bi-arrow-down'></i>";
+        btn.setAttribute('data-order','desc' );
+        order_input.value = 'desc';
+        console.log('indo para desc');
+    }
+    else
+    {
+        btn.innerHTML = "<i class='bi bi-arrow-up'></i>";
+        btn.setAttribute('data-order', 'asc');
+        order_input.value = 'asc';
+        console.log('indo para asc');
+        
+    }
+
+}
+
+
+
+/* =======================================
+    Tooltip Bootstrap
+=======================================*/
+
+function activatePopovers()
+{
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl, {
+        trigger: 'hover',
+        html: true
+    }))
+
+
+}

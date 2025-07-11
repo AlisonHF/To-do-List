@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
         <link href="../styles.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
         <title><?= $title ?></title>
     </head>
 
@@ -23,12 +24,16 @@
         <?php
             require_once('../src/utils/warning.php');
 
-            if (isset($_GET['status']) && isset($_GET['action']))
+            if (isset($_GET['status']) && isset($_GET['action'])) // Warning message
             {
                 $warning = getWarning($_GET['action'], $_GET['status']);
                 $status = $warning[0]; // status
                 $message_status = $warning[1]; // message
             }
+
+            $path_request = explode('?', $_SERVER['REQUEST_URI']);
+            $path =  ($path_request[0] === '/') ? '/tarefas' : $path_request[0];
+            
         ?>
 
         <?php if(isset($status)): ?>
@@ -47,25 +52,10 @@
         <div id="main-content">
             <div class='div-aux'>
                 <ul class="nav nav-tasks" id="nav-upper">
-                        <li class="nav-item" id="li-order-by">
-                            <?php if(isset($current_page)): ?>   
-                            <div class="dropdown">
-                                <button class="btn btn-warning btn-sm dropdown-toggle button-order-by" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Ordenar
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="<?= $current_page ?>?order_by=date">Por data</a></li>
-                                    <li><a class="dropdown-item" href="<?= $current_page ?>?order_by=alphabetic">Por ordem alfabética</a></li>
-                                    <?php if($current_page == '/tarefas/all'): ?>
-                                        <li><a class="dropdown-item" href="<?= $current_page ?>?order_by=status">Por status</a></li>
-                                    <?php endif; ?>    
-                                </ul>
-                            </div>
-                            <?php endif; ?>
-                        </li>
-                    </ul>
+                    
+                </ul>
                 <main id="main-menu">
-                    <ul class="nav flex-column task-menu">
+                    <ul class="nav flex-column options-menu">
                         <li>
                             <a href="/" class="link-menu btn" id="pagina_pendentes">Tarefas pendentes</a>
                         </li>
@@ -74,8 +64,38 @@
                         </li>
                         <li>
                             <a href="/tarefas/create" class="link-menu btn" id="pagina_nova">Nova tarefa</a>
-                        </li>           
+                        </li>
+                        
+                        <?php if(isset($display_page)): ?>
+                            <li id="li-order">
+                                <h6 class="mb-3">Ordenar</h6>
+
+                                <form method="GET" action="<?= $path ?>">
+                                    <div id="div-order">
+                                        <select name="order_by" id="select-order">
+                                            <option value="" selected disabled>Tipo</option>
+                                            <option value="alphabetic">Ordem alfabética</option>
+                                            <?php if ($display_page == '/tarefas/all'): ?>
+                                                <option value="status">Por status</option>
+                                            <?php endif; ?>
+                                            <option value="date">Por data</option>
+                                        </select>
+
+                                        <button type="button" id="btn-asc-desc" class="btn btn-warning" onclick="classify()" data-order="desc"
+                                         data-bs-toggle="popover" data-bs-title="Dica de ordenação" data-bs-custom-class="custom-popover"
+                                            data-bs-content="Seta para cima: Ordem crescente <br/>Seta para baixo: Ordem decrescente">
+                                            <i class="bi bi-arrow-down"></i>
+                                        </button>
+                                        <input type="text" name="order" id="order" value="desc" hidden>
+                                    </div>
+                                    
+                                    <button id="btn-order" class="btn btn-warning">Ordenar</button>
+                                </form>
+                            </li>
+                    <?php endif; ?>
                     </ul>
+
+                    
                     <div id="content" class="scroll-div overflow-auto">
                         <?= $content ?>
                     </div>
@@ -88,6 +108,7 @@
         <script src="../js/scripts.js"></script>
         <script>
             MainMenu.markActiveButton();
+            activatePopovers();
         </script>
     </body>
 </html>
