@@ -12,19 +12,19 @@ class MainMenu
         {
             case '/tarefas/create':
                 botao = document.getElementById('pagina_nova');
-                botao.className = "link-menu btn disabled";
+                botao.className = 'link-menu btn disabled';
                 break;
             case '/tarefas/all':
                 botao = document.getElementById('pagina_todas');
-                botao.className = "link-menu btn disabled";
+                botao.className = 'link-menu btn disabled';
                 break;
             case '/tarefas':
                 botao = document.getElementById('pagina_pendentes');
-                botao.className = "link-menu btn disabled";
+                botao.className = 'link-menu btn disabled';
                 break;
             case '/':
                 botao = document.getElementById('pagina_pendentes');
-                botao.className = "link-menu btn disabled";
+                botao.className = 'link-menu btn disabled';
                 break;
         }
     }
@@ -55,7 +55,7 @@ function validateForm()
             else
             {
                 label_info.hidden = 'hidden';
-                description_field.className = "form-control";
+                description_field.className = 'form-control';
             }
         }
     );
@@ -85,20 +85,16 @@ function classify()
     
     if (btn.getAttribute('data-order') == 'asc')
     {
-        btn.innerHTML = "<i class='bi bi-arrow-down'></i>";
+        btn.innerHTML = '<i class="bi bi-arrow-down"></i>';
         btn.setAttribute('data-order','desc' );
         order_input.value = 'desc';
-        console.log('indo para desc');
     }
     else
     {
-        btn.innerHTML = "<i class='bi bi-arrow-up'></i>";
+        btn.innerHTML = '<i class="bi bi-arrow-up"></i>';
         btn.setAttribute('data-order', 'asc');
         order_input.value = 'asc';
-        console.log('indo para asc');
-        
     }
-
 }
 
 
@@ -114,6 +110,71 @@ function activatePopovers()
         trigger: 'hover',
         html: true
     }))
+}
 
+
+
+/* =======================================
+    Modal Bootstrap
+=======================================*/
+
+function setupModals()
+{
+    if (document.getElementById('modal'))
+    {
+        const confirmModal = new bootstrap.Modal(document.getElementById('modal'));
+        const titleModal = document.getElementById('modal-title');
+        const modalText = document.getElementById('modal-text');
+        const deleteForm = document.getElementById('delete-form');
+        const completeForm = document.getElementById('complete-form');
+        const confirmSubmitBtn = document.getElementById('confirm-submit'); 
+
+        let formSubmit = null;
+
+        if (completeForm)
+        {
+            completeForm.addEventListener('submit', function(event)
+                {
+                event.preventDefault();
+
+                titleModal.textContent = 'Concluir tarefa';
+                modalText.textContent = 'Deseja concluir essa tarefa?';
+                confirmSubmitBtn.textContent = 'Concluir';
+                confirmSubmitBtn.className = 'btn btn-success';
+
+                confirmModal.show();
+                formSubmit = completeForm;
+                }
+            );
+        }
+        
+        if (deleteForm)
+        {
+            deleteForm.addEventListener('submit', function(event)
+                {
+                event.preventDefault();
+
+                titleModal.textContent = 'Excluir tarefa';
+                modalText.textContent = 'Deseja excluir essa tarefa?';
+                confirmSubmitBtn.textContent = 'Excluir';
+                confirmSubmitBtn.className = 'btn btn-danger';
+
+                confirmModal.show();
+                formSubmit = deleteForm;
+                }
+            );
+        }
+
+        confirmSubmitBtn.addEventListener('click', function()
+            {
+                if (formSubmit)
+                {
+                    confirmModal.hide();
+                    formSubmit.submit();
+                }
+                
+            }
+        );
+    }
 
 }

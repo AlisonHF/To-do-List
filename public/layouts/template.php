@@ -109,6 +109,7 @@
         <script>
             MainMenu.markActiveButton();
             activatePopovers();
+            setupModals();
         </script>
     </body>
 </html>

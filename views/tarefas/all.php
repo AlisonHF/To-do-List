@@ -18,6 +18,7 @@
     <?php foreach($list as $key => $register): // Displays the task card ?>
         <div class="col"> 
             <div class="card h-100 card-task">
+
                 <div class="card-body">
                     <h4><?= $register['descricao'] ?></h4>
                     <h6>
@@ -27,6 +28,7 @@
                         ?>
                         <?= $date ?>
                     </h6>
+
                     <p>
                         <?php if ($register['id_status'] == 1): ?>
                             <span class="badge text-bg-warning">Pendente</span>
@@ -34,26 +36,35 @@
                             <span class="badge text-bg-success">Concluído</span>
                         <?php endif ?>
                     </p>
+
                     <div class="row-forms">
-                        <form method="POST" action="/tarefas/delete">
-                            <button class="btn btn-outline-danger btn-options" name="delete_id" value="<?= $register['id'] ?>" >
+
+                        <form id="delete-form" method="POST" action="/tarefas/delete">
+                            <button class="btn btn-outline-danger btn-options" value="<?= $register['id'] ?>" type="submit">
                                 <i class="bi bi-x-square" style="color:red;"></i> Excluir
                             </button>
+                            <input name="delete_id" value=<?= $register['id'] ?> hidden>
                         </form>
+
                         <?php if ($register['id_status'] == '1'): ?>
-                            <form method="POST" action="/tarefas/edit">
+
+                            <form id="edit-form" method="POST" action="/tarefas/edit">
                                 <button class="btn btn-outline-dark btn-options" name="edit_id" value="<?= $register['id'] ?>">
-                                <i class="bi bi-pencil-square"></i> Alterar
+                                    <i class="bi bi-pencil-square"></i> Alterar
                                 </button>
                                 <input name="description_update" value="<?= $register['descricao']?>" hidden>
                             </form>
-                            <form method="POST" action="/tarefas/complete">
-                                <button class="btn btn-outline-success btn-options" name="complete_id" value="<?= $register['id'] ?>">
-                                <i class="bi bi-check-lg"></i> Concluir
+
+                            <form id="complete-form" method="POST" action="/tarefas/complete">
+                                <button class="btn btn-outline-success btn-options" value="<?= $register['id'] ?>">
+                                    <i class="bi bi-check-lg"></i> Concluir
                                 </button>
+                                <input name="complete_id" value=<?= $register['id'] ?> hidden>
                             </form>
+
                         <?php endif; ?>
                     </div>
+
                 </div>   
                 <div class="card-footer">
                     <small class="text-body-secondary">ID: <?= $register['id']; ?></small>
@@ -65,6 +76,24 @@
   </div>
 
 <?php endif; ?>
+
+<div class="modal" tabindex="-1" id="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="modal-title" class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="modal-text">Text Modal</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" id="confirm-submit">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <?php
     $content = ob_get_clean();
