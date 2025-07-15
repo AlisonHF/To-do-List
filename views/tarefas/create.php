@@ -3,7 +3,7 @@
     ob_start();
 ?>
 
-<form method="POST" action="/tarefas/store" class="standard-form" id="form">
+<form method="POST" action="/tarefas/store" class="standard-form" id="edit-form">
     <h3 style="text-align: center;" class="mt-2 mb-4">Adicionar tarefa</h3>
     <label class="form-label">Tarefa</label>
     <textarea id="description" name="description" type="text" placeholder="Escreva aqui sua tarefa..." class="form-control" style="height: 100px;" required="required" minlength="1" maxlength="100"></textarea>

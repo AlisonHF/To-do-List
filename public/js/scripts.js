@@ -38,7 +38,7 @@ class MainMenu
 
 function validateForm()
 {
-    let form = document.getElementById('form');
+    let form = document.getElementById('edit-form');
     let description_field = document.getElementById('description');
     let label_info = document.getElementById('required-info');
 
@@ -122,50 +122,73 @@ function setupModals()
 {
     if (document.getElementById('modal'))
     {
-        const confirmModal = new bootstrap.Modal(document.getElementById('modal'));
-        const titleModal = document.getElementById('modal-title');
-        const modalText = document.getElementById('modal-text');
-        const deleteForm = document.getElementById('delete-form');
-        const completeForm = document.getElementById('complete-form');
-        const confirmSubmitBtn = document.getElementById('confirm-submit'); 
-
-        let formSubmit = null;
-
-        if (completeForm)
+        document.addEventListener('DOMContentLoaded', function ()
         {
-            completeForm.addEventListener('submit', function(event)
-                {
-                event.preventDefault();
+            const confirmModal = new bootstrap.Modal(document.getElementById('modal'));
+            const titleModal = document.getElementById('modal-title');
+            const modalText = document.getElementById('modal-text');
+            const confirmSubmitBtn = document.getElementById('confirm-submit'); 
 
-                titleModal.textContent = 'Concluir tarefa';
-                modalText.textContent = 'Deseja concluir essa tarefa?';
-                confirmSubmitBtn.textContent = 'Concluir';
-                confirmSubmitBtn.className = 'btn btn-success';
+            const deleteFormsNode = document.getElementsByName('delete-form');
+            const deleteForms = [...deleteFormsNode];
+
+            const completeFormsNode = document.getElementsByName('complete-form');
+            const completeForms = [...completeFormsNode];
+
+            const editForm = document.getElementById('edit-form');
+
+            if (editForm)
+            {
+                editForm.addEventListener('submit', function(event)
+            {
+                event.preventDefault();
+                console.log('Localizou o editForm');
+                titleModal.textContent = 'Alterar tarefa';
+                modalText.textContent = 'Deseja alterar essa tarefa?';
+                confirmSubmitBtn.textContent = 'Alterar';
+                confirmSubmitBtn.className = 'btn btn-warning';
 
                 confirmModal.show();
-                formSubmit = completeForm;
-                }
-            );
-        }
-        
-        if (deleteForm)
-        {
-            deleteForm.addEventListener('submit', function(event)
+                formSubmit = editForm;
+            });
+                
+            }
+
+            
+            completeForms.forEach(element => {
+                element.addEventListener('submit', function(event)
+                    {
+                    event.preventDefault();
+
+                    titleModal.textContent = 'Concluir tarefa';
+                    modalText.textContent = 'Deseja concluir essa tarefa?';
+                    confirmSubmitBtn.textContent = 'Concluir';
+                    confirmSubmitBtn.className = 'btn btn-success';
+
+                    confirmModal.show();
+                    formSubmit = element;
+                    }
+                );
+            });
+            
+
+            deleteForms.forEach(element => 
+            {
+                element.addEventListener('submit', function(event)
                 {
-                event.preventDefault();
+                    event.preventDefault();
 
-                titleModal.textContent = 'Excluir tarefa';
-                modalText.textContent = 'Deseja excluir essa tarefa?';
-                confirmSubmitBtn.textContent = 'Excluir';
-                confirmSubmitBtn.className = 'btn btn-danger';
+                    titleModal.textContent = 'Excluir tarefa';
+                    modalText.textContent = 'Deseja excluir essa tarefa?';
+                    confirmSubmitBtn.textContent = 'Excluir';
+                    confirmSubmitBtn.className = 'btn btn-danger';
 
-                confirmModal.show();
-                formSubmit = deleteForm;
-                }
-            );
-        }
-
-        confirmSubmitBtn.addEventListener('click', function()
+                    confirmModal.show();
+                    formSubmit = element;
+                });
+            })
+                
+            confirmSubmitBtn.addEventListener('click', function()
             {
                 if (formSubmit)
                 {
@@ -173,8 +196,7 @@ function setupModals()
                     formSubmit.submit();
                 }
                 
-            }
-        );
+            });
+        })
     }
-
 }

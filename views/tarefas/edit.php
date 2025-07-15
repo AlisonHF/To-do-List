@@ -3,7 +3,7 @@
     ob_start();
  ?>
  
-<form method="POST" action="/tarefas/update" class="standard-form" id="form">
+<form method="POST" action="/tarefas/update" class="standard-form" id="edit-form">
     <h3 style="text-align: center;" class="mt-2 mb-4">Alterar tarefa</h3>
     <label class="form-label">Tarefa</label>
     <input type="number" name="edit_id" value=<?=$_POST['edit_id'] ?> hidden>
@@ -12,7 +12,8 @@
     <button id="button-submit" class="btn btn-success mt-4 mb-2">Adicionar</button>
 </form>
 
-<?php 
+<?php
+    include_once('layouts/modal.php');
     $content = ob_get_clean();
     require_once('layouts/template.php');
 ?>
