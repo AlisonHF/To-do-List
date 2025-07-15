@@ -1,5 +1,5 @@
 <?php
-
+// Function to sow a warning if called
 function getWarning($action, $status)
 {
 
@@ -70,6 +70,4 @@ function getWarning($action, $status)
 
     return array($status, $message_status);
 }
-
 ?>
-

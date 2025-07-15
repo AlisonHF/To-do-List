@@ -1,5 +1,4 @@
 <?php 
-
     $host = 'localhost';
     $db_name = 'to_do_list';
     $user = 'root';
@@ -33,5 +32,4 @@
         '<br/>' . 
         $e->getCode();
     }
-
 ?>

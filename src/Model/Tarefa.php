@@ -1,5 +1,4 @@
 <?php 
-
     require_once __DIR__ . '/../Config/Database.php';
 
     class Task {
@@ -9,23 +8,6 @@
         {
             $this->pdo = Database::getConnection();
 
-            $query_inicializadora = 'create table if not exists tarefas(
-                    id int not null auto_increment,
-                    id_status int not null default 1, 
-                    descricao varchar(200) not null,
-                    data date,
-                    primary key (id)
-            )';
-
-            try
-            {
-                $this->pdo->query($query_inicializadora);
-            }
-            catch(PDOException $e)
-            {
-                echo '<h3 style="color:red;">Ocorreu um erro para inicializar a tabela tarefas!</h3>';
-                echo 'Código:' . $e->getCode() . '<br/>Mensagem: ' . $e->getMessage();
-            }
         }
 
         public function addTask(string $description)

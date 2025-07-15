@@ -7,8 +7,8 @@
                     <h4><?= $register['descricao'] ?></h4>
                     <h6>
                         <?php
-                            $date = date_create($register['data']);
-                            $date = $date->format('d/m/Y');
+                            include_once('../src/utils/formatDate.php');
+                            $date = formatDate($register['data']);
                         ?>
                         <?= $date ?>
                     </h6>

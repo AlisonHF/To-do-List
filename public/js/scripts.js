@@ -137,6 +137,8 @@ function setupModals()
 
             const editForm = document.getElementById('edit-form');
 
+            let formSubmit;
+
             if (editForm)
             {
                 editForm.addEventListener('submit', function(event)
