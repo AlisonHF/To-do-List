@@ -1,6 +1,9 @@
 <?php
-    require_once __DIR__ . '/../Model/Tarefa.php';
-    require_once __DIR__ . '/../utils/formatString.php';
+
+    namespace Src\Controller;
+
+    use Src\Model\Task;
+    use Src\utils\FormatHelper;
 
     class TarefaController
     {
@@ -66,7 +69,7 @@
         public function store()
         {
             $description = $_POST['description'];
-            $description = FormatDescription($description);
+            $description = FormatHelper::FormatDescription($description);
 
             if (strlen($description) < 3 || strlen($description) > 100)
             {
@@ -169,7 +172,7 @@
         {
             $update_id = $_POST['edit_id'];
             $description = $_POST['descricao'];
-            $description = FormatDescription($description);
+            $description = FormatHelper::FormatDescription($description);
             if (strlen($description) < 3 || strlen($description) > 100)
             {
                 header('Location: /tarefas/all?action=update&status=failed');
@@ -187,6 +190,11 @@
                 exit;
             }
             
+        }
+
+        public function teste()
+        {
+            include $this->path_views . 'teste.php';
         }
     }
 ?>

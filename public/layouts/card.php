@@ -1,5 +1,9 @@
+<?php use Src\utils\FormatHelper; ?>
+
 <div class="row row-cols-1 row-cols-md-1 row-cols-lg-1 row-cols-xl-2 row-cols-xxl-3 g-4">
+
     <?php foreach($list as $key => $register): // Displays the task card ?>
+
         <div class="col"> 
             <div class="card h-100 card-task">
 
@@ -7,8 +11,7 @@
                     <h4><?= $register['descricao'] ?></h4>
                     <h6>
                         <?php
-                            include_once('../src/utils/formatDate.php');
-                            $date = formatDate($register['data']);
+                            $date = FormatHelper::formatDate($register['data']);
                         ?>
                         <?= $date ?>
                     </h6>
@@ -58,5 +61,7 @@
 
             </div>
         </div>
+
     <?php endforeach; ?>
+    
 </div>

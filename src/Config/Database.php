@@ -1,4 +1,6 @@
 <?php
+    namespace Src\Config;
+
     class Database
     {
         private static $instance = null;
@@ -15,11 +17,11 @@
             $dsn = "mysql:host=$host;dbname=$db_name;charset=$charset";
 
             try {
-                $this->connection = new PDO($dsn, $user, $pass);
+                $this->connection = new \PDO($dsn, $user, $pass);
             }
-            catch(PDOException $e)
+            catch(\PDOException $e)
             {
-                throw new PDOException($e->getMessage(), $e->getCode());
+                throw new \PDOException($e->getMessage(), $e->getCode());
             }
         }
 

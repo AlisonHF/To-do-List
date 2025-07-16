@@ -1,4 +1,8 @@
 <?php 
+    namespace Src\Model;
+
+    use Src\Config\Database;
+
     require_once __DIR__ . '/../Config/Database.php';
 
     class Task {
@@ -25,7 +29,7 @@
             $query = "select id, id_status, descricao, data from tarefas
                 order by data desc";
             $stmt = $this->pdo->query($query);
-            $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $list = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             return $list;
         }
 
@@ -52,7 +56,7 @@
             $query = "select id, id_status, descricao, data from tarefas where id_status = 1
                 order by data desc";
             $stmt = $this->pdo->query($query);
-            $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $list = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             return $list;
         }
 
@@ -62,7 +66,7 @@
             $stmt = $this->pdo->prepare($query);
             $stmt->bindValue(':id', $id);
             $stmt->execute();
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
             
             if ($result['id_status'] == 0)
             {
@@ -108,7 +112,7 @@
             
             $stmt = $this->pdo->prepare($query);
             $stmt->execute();
-            $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $list = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             return $list;
         }
     }

@@ -1,3 +1,5 @@
+<?php use Src\utils\Warning; ?>
+
 <!DOCTYPE html>
 
 <html lang="pt-BR">
@@ -8,25 +10,22 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
         <link href="../styles.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
         <title><?= $title ?></title>
     </head>
 
     <body>
 
-        <nav class="navbar" id="navigation-bar">
+        <nav class="navbar navbar-expand-lg" id="navigation-bar">
             <div class="container-fluid">
                 <a href="#" class="navbar-brand" style="font-weight: bold; color:#45484b;"><i class="bi bi-file-text"></i> To-do-List</a>
             </div>
-
         </nav>
 
         <?php
-            require_once('../src/utils/warning.php');
 
             if (isset($_GET['status']) && isset($_GET['action'])) // Warning message
             {
-                $warning = getWarning($_GET['action'], $_GET['status']);
+                $warning = Warning::getWarning($_GET['action'], $_GET['status']);
                 $status = $warning[0]; // status
                 $message_status = $warning[1]; // message
             }
@@ -95,7 +94,6 @@
                     <?php endif; ?>
                     </ul>
 
-                    
                     <div id="content" class="scroll-div overflow-auto">
                         <?= $content ?>
                     </div>
