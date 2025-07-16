@@ -6,15 +6,17 @@
 
 <h2>Pré requisito</h2>
 <ul>
-<li>Necessário instalação do [XAMPP](https://www.apachefriends.org/index.html)</li>
+  <li>Necessária instalação do [XAMPP](https://www.apachefriends.org/index.html)</li>
+  <li>Necessária instalação do Composer(https://getcomposer.org)</li>
 </ul>
 <h3>Como executar com o XAMPP</h3>
 <ul>
   <li>Copie os arquivos do projeto para onde desejar</li>
   <li>Inicie o XAMPP e ative o módulo 'APACHE' e 'MYSQL'.</li>
   <li>Configure o PHP no PATH do sistema caso não esteja configurado</li>
-  <li>Vá até a pasta src/Config pelo CMD e aplique o comando para inicializar o banco de dados e as tabelas: <pre>php migrate.php</pre></li>
-  <li>Vá até a pasta public pelo CMD e aplique o comando: <pre>php -S localhost:8080</pre></li>
+  <li>Dentro da pasta raiz do projeto execute no terminal o comando: <pre>composer install </pre></li>
+  <li>Vá até a pasta src/Config pelo terminal e aplique o comando para inicializar o banco de dados e as tabelas: <pre>php migrate.php</pre></li>
+  <li>Vá até a pasta public pelo terminal e aplique o comando: <pre>php -S localhost:8080</pre></li>
   <li>Abra o navegador e acesse: localhost:8080</li>
 </ul>
 
